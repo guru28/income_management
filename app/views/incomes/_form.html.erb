@@ -10,26 +10,30 @@
       </ul>
     </div>
   <% end %>
-  <%= fields_for :payment do |form| %>
-    <div class="field">
-      <%= form.label :name %>
-      <%= form.text_field :name, id: :income_name %>
-    </div>
+  <% if @categories.present? %>
+    <%= fields_for :payment do |form| %>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :income_name, required: true %>
+      </div>
 
-    <div class="field">
-      <%= form.label :amount %>
-      <%= form.number_field :amount, id: :income_amount %>
-    </div>
+      <div class="field">
+        <%= form.label :amount %>
+        <%= form.number_field :amount, id: :income_amount, required: true %>
+      </div>
 
-    <div class="field">
-    <%= form.select :category_id, options_from_collection_for_select(@categories, 'id', 'name', :selected => form.try(:object).try(:category_id)) %>
+      <div class="field">
+      <%= form.select :category_id, options_from_collection_for_select(@categories, 'id', 'name', :selected => form.try(:object).try(:category_id)) %>
+      </div>
+    <% end %>
+
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
+  <% else %>
+    <p> please create category for income</p>
   <% end %>
-
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
      
 <% end %>

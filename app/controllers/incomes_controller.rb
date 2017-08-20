@@ -35,13 +35,14 @@ class IncomesController < ApplicationController
   def create
     @income = Income.new(income_params)
     @income.build_payment(payment_params)
+    @income.save
     respond_to do |format|
-      if @income.save
-
+      puts @income.payment.inspect
+      if @income.payment.present?
         format.html { redirect_to @income, notice: 'Income was successfully created.' }
         format.json { render :show, status: :created, location: @income }
       else
-        puts @income.errors.inspect
+        puts @income.payment.errors.inspect
         format.html { render :new }
         format.json { render json: @income.errors, status: :unprocessable_entity }
       end

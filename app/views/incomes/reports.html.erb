@@ -1,0 +1,19 @@
+<h1>Incomes</h1>
+<% if @incomes.present? %>
+	<% @incomes.each do |income| %>
+		<p><%= income.name %>: <%= income.amount %></p>
+	<% end %>
+<% else %>
+	<p> no income preasent </p>
+<% end %>
+<p><b>Total Income:</b> <%= @incomes.sum(:amount) %></p>
+<h1>Expences</h1>
+<% if @expences.present? %>
+	<% @expences.each do |expence| %>
+		<p><%= expence.name %>: <%= expence.amount %></p>
+	<% end %>
+<% else %>
+	<p> no expensence preasent </p>
+<% end %>
+<p><b>Total Expence:</b> <%= @expences.sum(:amount) %></p>
+<p><b>Remaining Amount:</b> <%= @incomes.sum(:amount) - @expences.sum(:amount) %></p>

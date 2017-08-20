@@ -2,12 +2,12 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @expence.name %>
+  <%= @expence.payment.name %>
 </p>
 
 <p>
   <strong>Amount:</strong>
-  <%= @expence.amount %>
+  <%= @expence.payment.amount %>
 </p>
 
 <%= link_to 'Edit', edit_expence_path(@expence) %> |

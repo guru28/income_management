@@ -12,15 +12,17 @@ class ExpencesController < ApplicationController
   def new
     @expence = Expence.new
     @categories = Category.all.expence
+    @expence.build_payment
   end
 
   def edit
+    @payment = @income.payment
     @categories = Category.all.expence
   end
 
   def create
     @expence = Expence.new(expence_params)
-
+    @expence.build_payment(payment_params)
     respond_to do |format|
       if @expence.save
         format.html { redirect_to @expence, notice: 'Expence was successfully created.' }
@@ -34,7 +36,7 @@ class ExpencesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @expence.update(expence_params)
+      if @expence.payment.update(expence_params)
         format.html { redirect_to @expence, notice: 'Expence was successfully updated.' }
         format.json { render :show, status: :ok, location: @expence }
       else
@@ -59,6 +61,10 @@ class ExpencesController < ApplicationController
     end
 
     def expence_params
-      params.require(:expence).permit(:name, :amount)
+      params.require(:expence).permit(:user_id)
+    end
+
+    def payment_params
+      params.require(:payment).permit(:name, :amount, :category_id)
     end
 end

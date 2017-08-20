@@ -4,6 +4,7 @@ class IncomesController < ApplicationController
 
   def index
     @incomes = current_user.incomes
+    @categories = Category.all.income
   end
 
   def show
@@ -12,11 +13,12 @@ class IncomesController < ApplicationController
   def new
     @income = Income.new
     @categories = Category.all.income
+    @income.build_payment
   end
 
   def reports
-    @incomes = current_user.incomes
-    @expences = current_user.expences
+    @incomes = current_user.incomes.joins(:payment)
+    @expences = current_user.expences.joins(:payment)
     respond_to do |format|
       format.html
       format.pdf do
@@ -26,17 +28,20 @@ class IncomesController < ApplicationController
   end
 
   def edit
+    @payment = @income.payment
     @categories = Category.all.income
   end
 
   def create
     @income = Income.new(income_params)
-
+    @income.build_payment(payment_params)
     respond_to do |format|
       if @income.save
+
         format.html { redirect_to @income, notice: 'Income was successfully created.' }
         format.json { render :show, status: :created, location: @income }
       else
+        puts @income.errors.inspect
         format.html { render :new }
         format.json { render json: @income.errors, status: :unprocessable_entity }
       end
@@ -45,7 +50,7 @@ class IncomesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @income.update(income_params)
+      if @income.payment.update(payment_params)
         format.html { redirect_to @income, notice: 'Income was successfully updated.' }
         format.json { render :show, status: :ok, location: @income }
       else
@@ -69,6 +74,10 @@ class IncomesController < ApplicationController
     end
 
     def income_params
-      params.require(:income).permit(:name, :amount, :user_id, :category_id)
+      params.require(:income).permit(:user_id)
+    end
+
+    def payment_params
+      params.require(:payment).permit(:name, :amount, :category_id)
     end
 end

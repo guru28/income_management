@@ -13,8 +13,8 @@
   <tbody>
     <% @incomes.each do |income| %>
       <tr>
-        <td><%= income.name %></td>
-        <td><%= income.amount %></td>
+        <td><%= income.payment.name %></td>
+        <td><%= income.payment.amount %></td>
         <td><%= link_to 'Show', income %></td>
         <td><%= link_to 'Edit', edit_income_path(income) %></td>
         <td><%= link_to 'Destroy', income, method: :delete, data: { confirm: 'Are you sure?' } %></td>

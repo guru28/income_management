@@ -14,8 +14,8 @@
   <tbody>
     <% @expences.each do |expence| %>
       <tr>
-        <td><%= expence.name %></td>
-        <td><%= expence.amount %></td>
+        <td><%= expence.payment.name %></td>
+        <td><%= expence.payment.amount %></td>
         <td><%= link_to 'Show', expence %></td>
         <td><%= link_to 'Edit', edit_expence_path(expence) %></td>
         <td><%= link_to 'Destroy', expence, method: :delete, data: { confirm: 'Are you sure?' } %></td>

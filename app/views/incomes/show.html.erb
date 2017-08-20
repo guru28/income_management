@@ -1,12 +1,12 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @income.name %>
+  <%= @income.payment.name %>
 </p>
 
 <p>
   <strong>Amount:</strong>
-  <%= @income.amount %>
+  <%= @income.payment.amount %>
 </p>
 
 <%= link_to 'Edit', edit_income_path(@income) %> |

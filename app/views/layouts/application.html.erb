@@ -23,6 +23,10 @@
         <div class=" navbar-brand pull-right" ><a href="/users/sign_out" data-method="delete">Sign Out</a></div>
       </div>
     </nav>
+
+    <div class="col-lg-12 col-md-12 text-center">
+      <h4>Hi <%= current_user.email[/[^@]+/].split(".").map {|n| n.capitalize }.join(" ") %></h4>
+    </div>
   <% end %>
     <%= yield %>
   </body>

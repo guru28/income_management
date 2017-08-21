@@ -14,12 +14,12 @@
     <%= fields_for :payment do |form| %>
       <div class="field">
         <%= form.label :name %>
-        <%= form.text_field :name, id: :income_name %>
+        <%= form.text_field :name, id: :income_name, required: true %>
       </div>
 
       <div class="field">
         <%= form.label :amount %>
-        <%= form.number_field :amount, id: :income_amount %>
+        <%= form.number_field :amount, id: :income_amount, required: true %>
       </div>
 
       <div class="field">

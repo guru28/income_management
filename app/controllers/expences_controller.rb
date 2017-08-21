@@ -3,7 +3,7 @@ class ExpencesController < ApplicationController
   before_action :set_expence, only: [:show, :edit, :update, :destroy]
 
   def index
-    @expences = Expence.all
+    @expences = current_user.expences
   end
 
   def show
@@ -11,13 +11,13 @@ class ExpencesController < ApplicationController
 
   def new
     @expence = Expence.new
-    @categories = Category.all.expence
+    @categories = current_user.categories.expence
     @expence.build_payment
   end
 
   def edit
-    @payment = @income.payment
-    @categories = Category.all.expence
+    @payment = @expence.payment
+    @categories = current_user.categories.expence
   end
 
   def create

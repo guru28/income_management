@@ -1,4 +1,11 @@
-
+<div class="col-lg-12">
+  <% if alert.present? %>
+  <div class="alert alert-danger">
+    <a href="#" data-dismiss="alert" class="close">×</a>
+    <%= alert %>
+  </div>
+  <% end %>
+</div>
 <h1>Categories</h1>
 
 <table>

@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = Category.all
+    @categories = current_user.categories
   end
 
   def show
@@ -43,10 +43,15 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+      if @category.payments.present?
+        format.html { redirect_to "/categories", alert: "you can't destroy category assigned to any income or expence."  }
+        format.json { redirect_to "/categories", alert: "you can't destroy category assigned to any income or payment." }
+      else
+        @category.destroy
+        format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

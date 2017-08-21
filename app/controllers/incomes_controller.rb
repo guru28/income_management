@@ -4,7 +4,7 @@ class IncomesController < ApplicationController
 
   def index
     @incomes = current_user.incomes
-    @categories = Category.all.income
+    @categories = current_user.categories.income
   end
 
   def show
@@ -12,7 +12,7 @@ class IncomesController < ApplicationController
 
   def new
     @income = Income.new
-    @categories = Category.all.income
+    @categories = current_user.categories.income
     @income.build_payment
   end
 
@@ -29,7 +29,7 @@ class IncomesController < ApplicationController
 
   def edit
     @payment = @income.payment
-    @categories = Category.all.income
+    @categories = current_user.categories.income
   end
 
   def create

@@ -12,4 +12,5 @@ class User < ApplicationRecord
 
   has_many :incomes
   has_many :expences
+  has_many :categories
 end

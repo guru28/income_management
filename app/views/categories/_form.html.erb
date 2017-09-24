@@ -16,11 +16,6 @@
     <%= form.text_field :name, id: :category_name %>
   </div>
 
-  <div class="field">
-    <%= form.label :category_type %>
-    <%= form.select(:category_type, Category.category_types.keys.map {|category| [category.titleize,category]}) %>
-  </div>
-
   <%= form.hidden_field :user_id, :value => current_user.id %>
 
   <div class="actions">

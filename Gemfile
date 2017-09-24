@@ -30,6 +30,8 @@ gem 'jquery-rails'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'will_paginate-bootstrap'
+
 gem 'devise'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'

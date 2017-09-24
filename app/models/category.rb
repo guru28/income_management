@@ -1,5 +1,4 @@
 class Category < ApplicationRecord
-	enum category_type: [:income, :expence]
 
 	validates :name,
     	presence: true
@@ -10,5 +9,5 @@ class Category < ApplicationRecord
       :message => "should contain alphabets only" 
     }
 
-    has_many :payments 
+    has_many :projects
 end
